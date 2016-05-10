@@ -9,16 +9,16 @@ package br.edu.ifpb.pos.relatorio.entidades;
  *
  * @author Emanuel Batista da Silva Filho - https://github.com/emanuelbatista
  */
-public class Peca {
+public class Servico {
     
-    private String nome;
+    private Long id;
 
-    public String getNome() {
-        return nome;
+    public Long getId() {
+        return id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setId(Long id) {
+        this.id = id;
     }
     
     

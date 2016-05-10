@@ -6,6 +6,7 @@
 package br.edu.ifpb.pos.relatorio.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -15,15 +16,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ContaPagamento extends Conta{
     
-    private Peca peca;
+    @JsonProperty("id_peca")
+    private Long idPeca;
 
-    public Peca getPeca() {
-        return peca;
+    public Long getIdPeca() {
+        return idPeca;
     }
 
-    public void setPeca(Peca peca) {
-        this.peca = peca;
+    public void setIdPeca(Long idPeca) {
+        this.idPeca = idPeca;
     }
+
+    
     
     
     

@@ -6,10 +6,11 @@
 package br.edu.ifpb.pos.relatorio;
 
 import br.edu.ifpb.pos.relatorio.resources.ContaPagamentoFornecedorRelatorioResources;
+import br.edu.ifpb.pos.relatorio.resources.ContaRecebimentoDataRelatorioResources;
+import br.edu.ifpb.pos.relatorio.resources.OrdemServicoClienteRelatorioResources;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
-import org.restlet.resource.ClientResource;
 import org.restlet.routing.Router;
 
 /**
@@ -19,7 +20,6 @@ import org.restlet.routing.Router;
 public class Main {
     
     public static void main(String[] args) throws Exception {
-        
         
         Component component = new Component();
         String port = System.getProperty("server.port");
@@ -32,6 +32,8 @@ public class Main {
         Router router = new Router();
         //
          router.attach("/relatorio/fornecedor/{idFornecedor}/contas-pagamento", ContaPagamentoFornecedorRelatorioResources.class);
+         router.attach("/relatorio/contas-recebimento/{data}", ContaRecebimentoDataRelatorioResources.class);
+         router.attach("/relatorio/cliente/{idCliente}/os", OrdemServicoClienteRelatorioResources.class);
         //
         Application application = new Application();
         application.setInboundRoot(router);

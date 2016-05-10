@@ -36,13 +36,12 @@ public class ContaPagamentoFornecedorRelatorioResources extends ServerResource {
         try {
             Fornecedor fornecedor = relatorioService.getFornecedor(idFornecedor);
             contaRelatorio.setFornecedor(fornecedor);
-            List<ContaPagamento> contaPagamentos=relatorioService.getContasPagamento(idFornecedor);
+            List<ContaPagamento> contaPagamentos=relatorioService.getContasPagamentoFornecedor(idFornecedor);
             contaRelatorio.setContas(contaPagamentos);
             return contaRelatorio;
         } catch (MalformedURLException | RemoteException ex) {
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL);
         }
-//return new ContaPagamentoFornecedorRelatorio();
     }
 
 }

@@ -8,6 +8,7 @@ package br.edu.ifpb.pos.relatorio;
 import br.edu.ifpb.pos.relatorio.resources.ContaPagamentoFornecedorRelatorioResources;
 import br.edu.ifpb.pos.relatorio.resources.ContaRecebimentoDataRelatorioResources;
 import br.edu.ifpb.pos.relatorio.resources.OrdemServicoClienteRelatorioResources;
+import br.edu.ifpb.pos.relatorio.resources.StatusOrdemServicoClienteRelatorioResources;
 import br.edu.ifpb.pos.relatorio.resources.VeiculoOrdemServicoResource;
 import org.restlet.Application;
 import org.restlet.Component;
@@ -32,6 +33,7 @@ public class Main {
         router.attach("/relatorio/fornecedor/{idFornecedor}/contas-pagamento", ContaPagamentoFornecedorRelatorioResources.class);
         router.attach("/relatorio/contas-recebimento/{data}", ContaRecebimentoDataRelatorioResources.class);
         router.attach("/relatorio/cliente/{idCliente}/os", OrdemServicoClienteRelatorioResources.class);
+        router.attach("/relatorio/cliente/{idCliente}/os/status", StatusOrdemServicoClienteRelatorioResources.class);
         router.attach("/relatorio/veiculo/{idVeiculo}/os", VeiculoOrdemServicoResource.class);
         //
         Application application = new Application();

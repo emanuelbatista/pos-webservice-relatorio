@@ -10,6 +10,7 @@ import br.edu.ifpb.pos.relatorio.entidades.ContaPagamento;
 import br.edu.ifpb.pos.relatorio.entidades.ContaRecebimento;
 import br.edu.ifpb.pos.relatorio.entidades.Fornecedor;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServico;
+import br.edu.ifpb.pos.relatorio.entidades.StatusOrdemServico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import br.edu.ifpb.pos.relatorio.entidades.VeiculoOrdemServicoTO;
@@ -70,6 +71,14 @@ public class RelatorioService {
         clientResource.getRequest().getAttributes().put("idCliente", idCliente);
         Representation representation = clientResource.get();
         OrdemServico[] oss = new ObjectMapper().readValue(representation.getText(), OrdemServico[].class);
+        return Arrays.asList(oss);
+    }
+
+    public List<StatusOrdemServico> getStatusOrdensServicoCliente(Long idCliente) throws IOException {
+        ClientResource clientResource = new ClientResource("https://oficina-os-orca.herokuapp.com/cliente/{idCliente}/os");
+        clientResource.getRequest().getAttributes().put("idCliente", idCliente);
+        Representation representation = clientResource.get();
+        StatusOrdemServico[] oss = new ObjectMapper().readValue(representation.getText(), StatusOrdemServico[].class);
         return Arrays.asList(oss);
     }
 

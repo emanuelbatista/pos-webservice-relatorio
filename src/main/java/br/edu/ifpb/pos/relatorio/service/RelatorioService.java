@@ -10,6 +10,8 @@ import br.edu.ifpb.pos.relatorio.entidades.ContaPagamento;
 import br.edu.ifpb.pos.relatorio.entidades.ContaRecebimento;
 import br.edu.ifpb.pos.relatorio.entidades.Fornecedor;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServico;
+import br.edu.ifpb.pos.relatorio.entidades.VeiculoOrdemServicoTO;
+import br.edu.ifpb.pos.service.autos.status.utils.JsonUtils;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -65,7 +67,26 @@ public class RelatorioService {
         clientResource.getRequest().getAttributes().put("idCliente", idCliente);
         OrdemServico[] servicos = clientResource.get(OrdemServico[].class);
         return Arrays.asList(servicos);
+    }
 
+    public VeiculoOrdemServicoTO getRelatorioVeiculoOrdemServico(long idVeiculo) {
+        ClientResource clientResource = new ClientResource("https://oficina-os-orca.herokuapp.com/os");
+//        OrdemServico[] result = clientResource.get(OrdemServico[].class);
+        try {
+            List<OrdemServico> result = JsonUtils.converterJsonEmListaOrdemServico(
+                    clientResource.get().getText());
+            VeiculoOrdemServicoTO to = new VeiculoOrdemServicoTO();
+            to.setIdVeiculo(idVeiculo);
+            for (OrdemServico os : result){
+                if (os.getIdVeiculo() == to.getIdVeiculo()){
+                    to.getOrdens().add(os);
+                }
+            }
+            return to;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

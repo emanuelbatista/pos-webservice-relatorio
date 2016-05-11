@@ -19,7 +19,25 @@ public class OrdemServico {
     private String status;
     private String observacoes;
     private List<Servico> servicos;
+    private long idCliente;
+    private long idVeiculo;
 
+    public long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public long getIdVeiculo() {
+        return idVeiculo;
+    }
+
+    public void setIdVeiculo(long idVeiculo) {
+        this.idVeiculo = idVeiculo;
+    }
+    
     public String getNumero() {
         return numero;
     }
@@ -51,8 +69,5 @@ public class OrdemServico {
     public void setServicos(List<Servico> servicos) {
         this.servicos = servicos;
     }
-    
-    
-    
     
 }

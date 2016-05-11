@@ -9,7 +9,7 @@ import br.edu.ifpb.pos.relatorio.entidades.Cliente;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServico;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServicoClienteRelatorio;
 import br.edu.ifpb.pos.relatorio.service.RelatorioService;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.util.List;
 import org.restlet.data.Status;
 import org.restlet.resource.Get;
@@ -38,9 +38,9 @@ public class OrdemServicoClienteRelatorioResources extends ServerResource{
             relatorio.setCliente(cliente);
             relatorio.setOrdensServico(ordensServico);
             return relatorio;
-        } catch (MalformedURLException ex) {
+        } catch (IOException ex) {
             throw new ResourceException(Status.SERVER_ERROR_INTERNAL,ex);
-        }
+        } 
     }
     
     

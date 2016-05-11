@@ -10,6 +10,8 @@ import br.edu.ifpb.pos.relatorio.entidades.ContaPagamento;
 import br.edu.ifpb.pos.relatorio.entidades.ContaRecebimento;
 import br.edu.ifpb.pos.relatorio.entidades.Fornecedor;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServico;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -19,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
+import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
 /**
@@ -60,11 +63,12 @@ public class RelatorioService {
         return clientService.searchClienteById(idCliente);
     }
 
-    public List<OrdemServico> getOrensServicosCliente(Long idCliente) {
+    public List<OrdemServico> getOrensServicosCliente(Long idCliente) throws IOException {
         ClientResource clientResource = new ClientResource("https://oficina-os-orca.herokuapp.com/cliente/{idCliente}/os");
         clientResource.getRequest().getAttributes().put("idCliente", idCliente);
-        OrdemServico[] servicos = clientResource.get(OrdemServico[].class);
-        return Arrays.asList(servicos);
+        Representation representation=clientResource.get();
+        OrdemServico[] oss= new ObjectMapper().readValue(representation.getText(), OrdemServico[].class);
+        return Arrays.asList(oss);
 
     }
 

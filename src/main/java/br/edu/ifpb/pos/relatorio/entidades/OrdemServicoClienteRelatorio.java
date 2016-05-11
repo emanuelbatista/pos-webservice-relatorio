@@ -5,12 +5,14 @@
  */
 package br.edu.ifpb.pos.relatorio.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 /**
  *
  * @author Emanuel Batista da Silva Filho - https://github.com/emanuelbatista
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrdemServicoClienteRelatorio {
     
     private Cliente cliente;

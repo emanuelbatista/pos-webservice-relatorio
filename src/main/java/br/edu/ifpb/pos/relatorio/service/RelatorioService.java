@@ -12,6 +12,8 @@ import br.edu.ifpb.pos.relatorio.entidades.Fornecedor;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import br.edu.ifpb.pos.relatorio.entidades.VeiculoOrdemServicoTO;
+import br.edu.ifpb.pos.service.autos.status.utils.JsonUtils;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -66,10 +68,29 @@ public class RelatorioService {
     public List<OrdemServico> getOrensServicosCliente(Long idCliente) throws IOException {
         ClientResource clientResource = new ClientResource("https://oficina-os-orca.herokuapp.com/cliente/{idCliente}/os");
         clientResource.getRequest().getAttributes().put("idCliente", idCliente);
-        Representation representation=clientResource.get();
-        OrdemServico[] oss= new ObjectMapper().readValue(representation.getText(), OrdemServico[].class);
+        Representation representation = clientResource.get();
+        OrdemServico[] oss = new ObjectMapper().readValue(representation.getText(), OrdemServico[].class);
         return Arrays.asList(oss);
+    }
 
+    public VeiculoOrdemServicoTO getRelatorioVeiculoOrdemServico(long idVeiculo) {
+        ClientResource clientResource = new ClientResource("https://oficina-os-orca.herokuapp.com/os");
+//        OrdemServico[] result = clientResource.get(OrdemServico[].class);
+        try {
+            List<OrdemServico> result = JsonUtils.converterJsonEmListaOrdemServico(
+                    clientResource.get().getText());
+            VeiculoOrdemServicoTO to = new VeiculoOrdemServicoTO();
+            to.setIdVeiculo(idVeiculo);
+            for (OrdemServico os : result) {
+                if (os.getIdVeiculo() == to.getIdVeiculo()) {
+                    to.getOrdens().add(os);
+                }
+            }
+            return to;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

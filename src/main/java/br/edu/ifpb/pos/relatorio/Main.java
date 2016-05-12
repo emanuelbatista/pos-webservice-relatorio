@@ -29,10 +29,10 @@ public class Main {
         //
         Router router = new Router();
         //
+        router.attach("/relatorio/veiculo/{idVeiculo}/os", VeiculoOrdemServicoResource.class);
+        router.attach("/relatorio/cliente/{idCliente}/os", OrdemServicoClienteRelatorioResources.class);
         router.attach("/relatorio/fornecedor/{idFornecedor}/contas-pagamento", ContaPagamentoFornecedorRelatorioResources.class);
         router.attach("/relatorio/contas-recebimento/{data}", ContaRecebimentoDataRelatorioResources.class);
-        router.attach("/relatorio/cliente/{idCliente}/os", OrdemServicoClienteRelatorioResources.class);
-        router.attach("/relatorio/veiculo/{idVeiculo}/os", VeiculoOrdemServicoResource.class);
         //
         Application application = new Application();
         application.setInboundRoot(router);

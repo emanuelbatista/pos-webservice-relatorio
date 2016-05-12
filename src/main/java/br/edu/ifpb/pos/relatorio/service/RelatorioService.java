@@ -71,7 +71,6 @@ public class RelatorioService {
 
     public VeiculoOrdemServicoTO getRelatorioVeiculoOrdemServico(long idVeiculo) {
         ClientResource clientResource = new ClientResource("https://oficina-os-orca.herokuapp.com/os");
-//        OrdemServico[] result = clientResource.get(OrdemServico[].class);
         try {
             List<OrdemServico> result = JsonUtils.converterJsonEmListaOrdemServico(
                     clientResource.get().getText());
@@ -88,5 +87,15 @@ public class RelatorioService {
         }
         return null;
     }
+    
+//    public ContaPagamento[] getRelatorioContaPagamentoPorData (Date data){
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        String dataTexto = dateFormat.format(data);
+//        ClientResource clientResource
+//                = new ClientResource("https://controle-financeiro-automovel.herokuapp.com/contas-recebimento/data/{data}");
+//        clientResource.getRequest().getAttributes().put("data", dataTexto);
+//        ContaRecebimento[] contaRecebimentos = clientResource.get(ContaRecebimento[].class);
+//        return Arrays.asList(contaRecebimentos);
+//    }
 
 }

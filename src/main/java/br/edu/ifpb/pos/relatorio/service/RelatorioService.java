@@ -10,6 +10,7 @@ import br.edu.ifpb.pos.relatorio.entidades.ContaPagamento;
 import br.edu.ifpb.pos.relatorio.entidades.ContaRecebimento;
 import br.edu.ifpb.pos.relatorio.entidades.Fornecedor;
 import br.edu.ifpb.pos.relatorio.entidades.ListaDePecas;
+import br.edu.ifpb.pos.relatorio.entidades.Orcamento;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServico;
 import br.edu.ifpb.pos.relatorio.entidades.Peca;
 import br.edu.ifpb.pos.relatorio.entidades.StatusOrdemServico;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import org.restlet.representation.Representation;
@@ -134,4 +137,15 @@ public class RelatorioService {
         return null;
     }
     
+    public List<Orcamento> getRelatorioOrcamentoPorVeiculoo (long veiculo){
+        ClientResource clientResource
+                = new ClientResource("https://oficina-os-orca.herokuapp.com/orcamento/veiculo/"+veiculo);
+        try {
+            return JsonUtils.converterJsonEmListaOrcamento(clientResource.get().getText());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
 }

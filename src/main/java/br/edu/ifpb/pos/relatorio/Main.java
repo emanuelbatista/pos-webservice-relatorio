@@ -8,6 +8,7 @@ package br.edu.ifpb.pos.relatorio;
 import br.edu.ifpb.pos.relatorio.resources.ContaPagamentoFornecedorRelatorioResources;
 import br.edu.ifpb.pos.relatorio.resources.ContaPagamentoPorDataResource;
 import br.edu.ifpb.pos.relatorio.resources.ContaRecebimentoDataRelatorioResources;
+import br.edu.ifpb.pos.relatorio.resources.OrcamentoPorVeiculoResource;
 import br.edu.ifpb.pos.relatorio.resources.OrdemServicoClienteRelatorioResources;
 import br.edu.ifpb.pos.relatorio.resources.PecaPorNomeRelatorio;
 import br.edu.ifpb.pos.relatorio.resources.StatusOrdemServicoClienteRelatorioResources;
@@ -39,6 +40,7 @@ public class Main {
         router.attach("/relatorio/cliente/{idCliente}/os/status", StatusOrdemServicoClienteRelatorioResources.class);
         router.attach("/relatorio/pecas/{nome}", PecaPorNomeRelatorio.class);
         router.attach("/relatorio/contas-pagamento/{data}", ContaPagamentoPorDataResource.class);
+        router.attach("/relatorio/orcamento/veiculo/{idVeiculo}", OrcamentoPorVeiculoResource.class);
         //
         Application application = new Application();
         application.setInboundRoot(router);

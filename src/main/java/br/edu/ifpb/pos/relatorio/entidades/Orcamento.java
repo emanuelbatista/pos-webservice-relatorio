@@ -9,11 +9,29 @@ import java.util.List;
  */
 public class Orcamento {
 
+    private long id;
     private String descricao;
     private long idVeiculo;
     private String email;
     private List<Servico> servicos;
+    private int valorTotal;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    public int getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(int valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+    
     public String getDescricao() {
         return descricao;
     }

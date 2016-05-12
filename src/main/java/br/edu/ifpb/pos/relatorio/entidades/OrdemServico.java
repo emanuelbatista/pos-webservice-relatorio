@@ -6,6 +6,7 @@
 package br.edu.ifpb.pos.relatorio.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,9 +14,9 @@ import java.util.List;
  * @author Emanuel Batista da Silva Filho - https://github.com/emanuelbatista
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OrdemServico {
+public class OrdemServico implements Serializable{
     
-    private String numero;
+    private Long numero;
     private String status;
     private String observacoes;
     private List<Servico> servicos;
@@ -38,11 +39,11 @@ public class OrdemServico {
         this.idVeiculo = idVeiculo;
     }
     
-    public String getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Long numero) {
         this.numero = numero;
     }
 

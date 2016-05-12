@@ -9,7 +9,9 @@ import br.edu.ifpb.pos.relatorio.entidades.Cliente;
 import br.edu.ifpb.pos.relatorio.entidades.ContaPagamento;
 import br.edu.ifpb.pos.relatorio.entidades.ContaRecebimento;
 import br.edu.ifpb.pos.relatorio.entidades.Fornecedor;
+import br.edu.ifpb.pos.relatorio.entidades.ListaDePecas;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServico;
+import br.edu.ifpb.pos.relatorio.entidades.Peca;
 import br.edu.ifpb.pos.relatorio.entidades.StatusOrdemServico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -100,15 +103,35 @@ public class RelatorioService {
         }
         return null;
     }
-    
-//    public ContaPagamento[] getRelatorioContaPagamentoPorData (Date data){
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//        String dataTexto = dateFormat.format(data);
-//        ClientResource clientResource
-//                = new ClientResource("https://controle-financeiro-automovel.herokuapp.com/contas-recebimento/data/{data}");
-//        clientResource.getRequest().getAttributes().put("data", dataTexto);
-//        ContaRecebimento[] contaRecebimentos = clientResource.get(ContaRecebimento[].class);
-//        return Arrays.asList(contaRecebimentos);
-//    }
 
+    public ContaPagamento[] getRelatorioContaPagamentoPorData (Date data){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String dataTexto = dateFormat.format(data);
+        ClientResource clientResource
+                = new ClientResource("https://controle-financeiro-automovel.herokuapp.com/contas-pagamento/data/{data}");
+        clientResource.getRequest().getAttributes().put("data", dataTexto);
+        ContaPagamento[] contaRecebimentos = clientResource.get(ContaPagamento[].class);
+        return contaRecebimentos;
+    }
+    
+    public List<Peca> getRelatorioPecaPorNome(String nome) {
+        try {
+            URL wsdl = new URL("http://servico-pecas.herokuapp.com/pecas?wsdl");
+            QName qname = new QName("http://services.basico.pecas.pos.ifpb.edu/", "PecaServiceImplService");
+            Service ws = Service.create(wsdl, qname);
+            PecaService pecaService = ws.getPort(PecaService.class);
+            ListaDePecas lista = pecaService.listPecas();
+            List<Peca> result = new ArrayList<>();
+            for (Peca peca : lista.getLista()){
+                if (peca.getNome().toLowerCase().contains(nome.toLowerCase())){
+                    result.add(peca);
+                }
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 }

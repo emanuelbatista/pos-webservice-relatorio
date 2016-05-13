@@ -13,6 +13,7 @@ import br.edu.ifpb.pos.relatorio.entidades.ListaDePecas;
 import br.edu.ifpb.pos.relatorio.entidades.Orcamento;
 import br.edu.ifpb.pos.relatorio.entidades.OrdemServico;
 import br.edu.ifpb.pos.relatorio.entidades.Peca;
+import br.edu.ifpb.pos.relatorio.entidades.QtdPecas;
 import br.edu.ifpb.pos.relatorio.entidades.StatusOrdemServico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -117,17 +118,18 @@ public class RelatorioService {
         return contaRecebimentos;
     }
     
-    public List<Peca> getRelatorioPecaPorNome(String nome) {
+    public QtdPecas getRelatorioPecaPorNome(String nome) {
         try {
             URL wsdl = new URL("http://servico-pecas.herokuapp.com/pecas?wsdl");
             QName qname = new QName("http://services.basico.pecas.pos.ifpb.edu/", "PecaServiceImplService");
             Service ws = Service.create(wsdl, qname);
             PecaService pecaService = ws.getPort(PecaService.class);
             ListaDePecas lista = pecaService.listPecas();
-            List<Peca> result = new ArrayList<>();
+            QtdPecas result = new QtdPecas();
+            result.setNome(nome);
             for (Peca peca : lista.getLista()){
                 if (peca.getNome().toLowerCase().contains(nome.toLowerCase())){
-                    result.add(peca);
+                    result.setQtd(result.getQtd()+ 1);
                 }
             }
             return result;

@@ -1,6 +1,7 @@
 package br.edu.ifpb.pos.relatorio.resources;
 
 import br.edu.ifpb.pos.relatorio.entidades.Peca;
+import br.edu.ifpb.pos.relatorio.entidades.QtdPecas;
 import br.edu.ifpb.pos.relatorio.service.RelatorioService;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,9 @@ public class PecaPorNomeRelatorio extends ServerResource{
     private RelatorioService relatorioService = new RelatorioService();
     
     @Get("json")
-    public List<Peca> getRelatorio (){
+    public QtdPecas getRelatorio (){
         String nome = getAttribute("nome");
-        List<Peca> result = relatorioService.getRelatorioPecaPorNome(nome);
-        return result == null ? new ArrayList<Peca>() : result;
+        return relatorioService.getRelatorioPecaPorNome(nome);
     }
     
 }

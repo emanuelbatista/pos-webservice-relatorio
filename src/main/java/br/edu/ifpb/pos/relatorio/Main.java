@@ -36,10 +36,10 @@ public class Main {
         router.attach("/relatorio/veiculo/{idVeiculo}/os", VeiculoOrdemServicoResource.class);
         router.attach("/relatorio/cliente/{idCliente}/os", OrdemServicoClienteRelatorioResources.class);
         router.attach("/relatorio/fornecedor/{idFornecedor}/contas-pagamento", ContaPagamentoFornecedorRelatorioResources.class);
-        router.attach("/relatorio/contas-recebimento/{data}", ContaRecebimentoDataRelatorioResources.class);
+        router.attach("/relatorio/contas-recebimento/data/{data}", ContaRecebimentoDataRelatorioResources.class);
         router.attach("/relatorio/cliente/{idCliente}/os/status", StatusOrdemServicoClienteRelatorioResources.class);
         router.attach("/relatorio/pecas/{nome}", PecaPorNomeRelatorio.class);
-        router.attach("/relatorio/contas-pagamento/{data}", ContaPagamentoPorDataResource.class);
+        router.attach("/relatorio/contas-pagamento/data/{data}", ContaPagamentoPorDataResource.class);
         router.attach("/relatorio/orcamento/veiculo/{idVeiculo}", OrcamentoPorVeiculoResource.class);
         //
         Application application = new Application();

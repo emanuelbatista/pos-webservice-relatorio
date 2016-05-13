@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>br.edu.ifpb.pos</groupId>
-    <version>1.0</version>
+    <parent>
+        <groupId>br.edu.ifpb.pos</groupId>
+        <artifactId>pos-ultimo-projeto</artifactId>
+        <version>1.0</version>
+    </parent>
     <artifactId>relatorio</artifactId>
     <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
-    <repositories>
-        <repository>
-            <id>maven-restlet</id>
-            <name>Public online Restlet repository</name>
-            <url>http://maven.restlet.org</url>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.restlet.jse</groupId>
@@ -34,4 +30,27 @@
         </dependency>
     </dependencies>
     
+     <build>
+        <plugins>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <appName>pos-relatorio</appName>
+                    <processTypes>
+                        <web>java $JAVA_OPTS -Dserver.port=$PORT -cp target/classes:target/dependency/* br.edu.ifpb.pos.relatorio.Main</web>
+                    </processTypes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <repositories>
+        <repository>
+            <id>maven-restlet</id>
+            <name>Public online</name>
+            <url>http://maven.restlet.org</url>
+        </repository>
+    </repositories>
 </project>

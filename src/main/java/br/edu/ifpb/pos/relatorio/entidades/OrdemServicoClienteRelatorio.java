@@ -23,8 +23,6 @@ public class OrdemServicoClienteRelatorio {
         ordensServico=Collections.EMPTY_LIST;
     }
     
-    
-
     public Cliente getCliente() {
         return cliente;
     }
